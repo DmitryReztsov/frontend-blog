@@ -13,7 +13,7 @@ export const GlobalStyle =  createGlobalStyle`
   article, aside, canvas, details, embed,
   figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
+  time, mark, audio, video, input, select, textarea, button {
     margin: 0;
     margin-block-start: 0;
     margin-block-end: 0;
@@ -23,6 +23,21 @@ export const GlobalStyle =  createGlobalStyle`
     vertical-align: baseline;
   }
 
+  * {
+    box-sizing: border-box;
+    &::-webkit-scrollbar {
+      display: none;
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      display: none;
+      width: 2px;
+      height: 2px;
+      border-radius: 2px;
+    }
+  }
+  
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
   footer, header, hgroup, menu, nav, section {
@@ -30,27 +45,29 @@ export const GlobalStyle =  createGlobalStyle`
   }
 
   html, body {
-    line-height: 1;
+    font-size: 1rem;
+    line-height: 1.5;
     width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    min-height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, Montserrat, Roboto, Helvetica Neue, Arial;
+    color: ${props => props.theme.text.primary};
+    background: ${props => props.theme.background.primary};
+  }
+
+  #___gatsby {
+    position: relative;
+  }
+
+  #___gatsby, #gatsby-focus-wrapper {
+    width: 100%;
+    min-height: 100%;
   }
   
-  #___gatsby {
-    width: 100%;
-    height: 100%;
+  a {
+    text-decoration: none;
+    color: unset;
   }
-
-  #gatsby-focus-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
+  
   ol, ul {
     list-style: none;
   }
@@ -72,7 +89,8 @@ export const GlobalStyle =  createGlobalStyle`
   input, select, textarea, button {
     border: none;
     font-family: inherit;
-    font-size: 100%;
+    color: ${props => props.theme.text.primary};
+    background: ${props => props.theme.background.primary};
 
     &:focus {
       outline: 0;
@@ -88,21 +106,6 @@ export const GlobalStyle =  createGlobalStyle`
 
   input:-webkit-autofill{
     //-webkit-text-fill-color: var(--text-main) !important;
-  }
-
-  * {
-    box-sizing: border-box;
-    &::-webkit-scrollbar {
-      display: none;
-      width: 6px;
-      height: 6px;
-    }
-    &::-webkit-scrollbar-thumb {
-      display: none;
-      width: 2px;
-      height: 2px;
-      border-radius: 2px;
-    }
   }
 
   input::-webkit-outer-spin-button,

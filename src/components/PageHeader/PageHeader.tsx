@@ -1,60 +1,57 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react';
 
-const Container = styled.div`
-  padding: 20px;
-  background: ${props => props.theme.background.primary};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
+import * as S from './styles'
 
-const Logo = styled.h1`
-  color: ${props => props.theme.text.primary};
-  font-size: 32px;
-`
-
-const Menu = styled.ul`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`
-
-const MenuItem = styled.li`
-  color: ${props => props.theme.text.primary};
-`
+import Link from '@uikit/Link/Link';
+import SiteContainer from '@components/SiteContainer/SiteContainer';
+import ThemeSwitcher from '@uikit/ThemeSwitcher/ThemeSwitcher';
 
 const list = [
   {
+    title: 'Home',
+    to: '/',
+  },
+  {
     title: 'Blog',
-    href: '/',
+    to: '/blog',
   },
   {
     title: 'Projects',
-    href: '/',
+    to: '/projects',
   },
   {
-    title: 'About author',
-    href: '/',
+    title: 'About',
+    to: '/about',
   },
   {
-    title: 'Contacts',
-    href: '/',
+    title: 'Contact',
+    to: '/contact',
   },
 ]
 
-const PageHeader = () => {
+interface PageHeaderProps {
+  setTheme: () => void,
+}
+
+const PageHeader: FC<PageHeaderProps> = ({ setTheme }) => {
   return (
-    <Container>
-      <Logo>
-        {'<frontzilla/>'}
-      </Logo>
-      <Menu>
-        {list.map((elem) => {
-          return <MenuItem key={elem.title}>{elem.title}</MenuItem>
-        })}
-      </Menu>
-    </Container>
+    <S.PageHeader>
+      <SiteContainer>
+        <S.Container>
+          <S.Logo to={'/'}>
+            {'<frontzilla/>'}
+          </S.Logo>
+          <S.Menu>
+            {list.map((elem) => {
+              return <Link key={elem.title} to={elem.to}>{elem.title}</Link>
+            })}
+          </S.Menu>
+          <S.Controls>
+            <ThemeSwitcher setTheme={setTheme} />
+          </S.Controls>
+        </S.Container>
+      </SiteContainer>
+    </S.PageHeader>
   );
 };
 

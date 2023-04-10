@@ -1,31 +1,22 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
-import styled, { ThemeProvider } from 'styled-components';
 
-import PageHeader from '../components/PageHeader/PageHeader';
-import { LightTheme, DarkTheme } from "../style/theme";
-import { GlobalStyle } from "../style/global";
-import PageFooter from '../components/PageFooter/PageFooter';
-
-const Main = styled.main`
-  flex: 1 1 auto;
-`
+import BaseLayout from '@layouts/BaseLayout';
+import Seo from '@components/Seo/Seo';
+import Intro from "@components/index-page/Intro/Intro";
+import Technologies from "@components/index-page/Technologies/Technologies";
+import Trending from '@components/index-page/Trending/Trending';
 
 const IndexPage: React.FC<PageProps> = () => {
-  const isLightTheme = window.matchMedia('(prefers-color-scheme: light)').matches;
   return (
-    <>
-      <GlobalStyle />
-      <ThemeProvider theme={isLightTheme ? LightTheme : DarkTheme}>
-        <PageHeader />
-        <Main>
-        </Main>
-        <PageFooter />
-      </ThemeProvider>
-    </>
+    <BaseLayout>
+      <Intro />
+      <Technologies />
+      <Trending />
+    </BaseLayout>
   )
 }
 
 export default IndexPage
 
-export const Head: HeadFC = () => <title>Frontzilla - Home Page</title>
+export const Head: HeadFC = () => <Seo title="Home - Frontzilla" />
