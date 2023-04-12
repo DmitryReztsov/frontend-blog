@@ -10,6 +10,7 @@ export interface ITheme {
   background: {
     primary: string,
     secondary: string,
+    code: string,
   },
   text: {
     primary: string,

@@ -8,6 +8,7 @@ export const BaseTheme: ITheme  = {
   background: {
     primary: 'hsl(0,0%,100%)',
     secondary: 'hsl(0,0%,90%)',
+    code: 'hsl(0,0%,80%)',
   },
   text: {
     primary: 'hsl(240,6%,10%)',
@@ -22,10 +23,10 @@ export const BaseTheme: ITheme  = {
     small: '0.5rem',
   },
   media: {
-    extraLarge: '(max-width: 1440px)',
-    large: '(max-width: 1024px)',
-    medium: '(max-width: 768px)',
-    small: '(max-width: 540px)',
+    extraLarge: 'max-width: 1440px',
+    large: 'max-width: 1024px',
+    medium: 'max-width: 768px',
+    small: 'max-width: 540px',
   }
 }
 
@@ -40,6 +41,7 @@ export const LightTheme: DefaultTheme = {
     ...BaseTheme.background,
     primary: 'hsl(0,0%,100%)',
     secondary: 'hsl(0,0%,97%)',
+    code: 'hsl(0,0%,93%)',
   },
   text: {
     ...BaseTheme.text,
@@ -63,6 +65,7 @@ export const DarkTheme: DefaultTheme = {
     ...BaseTheme.background,
     primary: 'hsl(240,6%,10%)',
     secondary: 'hsl(240,6%,12%)',
+    code: 'hsl(240,6%,18%)',
   },
   text: {
     ...BaseTheme.text,

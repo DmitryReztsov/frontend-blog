@@ -2,28 +2,39 @@ import React from 'react';
 import { HeadFC, PageProps, StaticQueryDocument } from 'gatsby';
 import { graphql } from 'gatsby'
 
-import * as S from './styles';
-
 import BaseLayout from '@layouts/BaseLayout';
 import Seo from '@components/Seo/Seo';
 import { Title1 } from '@style/components/title';
 import SiteContainer from '@components/SiteContainer/SiteContainer';
-import Post from '@components/blog/Post';
+import PreviewPost from '@components/blog/PreviewPost';
+import styled from 'styled-components';
+
+const StyledBlog = styled.div`
+  padding-top: 10rem;
+  min-height: 100%;
+`
+
+const Posts = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2rem;
+  gap: 2rem;
+`
 
 const Blog = ({ data }: PageProps<Queries.loadBlogPostListQuery>) => {
   const posts = data.allContentfulBlogPost.nodes;
   return (
     <BaseLayout>
-      <S.Blog>
+      <StyledBlog>
         <SiteContainer>
           <Title1>
             Blog
           </Title1>
-          <S.Posts>
-            {posts.map((post) => <Post key={post.id} post={post} />)}
-          </S.Posts>
+          <Posts>
+            {posts.map((post) => <PreviewPost key={post.id} post={post} />)}
+          </Posts>
         </SiteContainer>
-      </S.Blog>
+      </StyledBlog>
     </BaseLayout>
   );
 };

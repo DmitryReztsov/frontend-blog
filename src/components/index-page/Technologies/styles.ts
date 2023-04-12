@@ -31,7 +31,7 @@ export const Tags = styled.div`
 export const Picture = styled.div`
   position: relative;
   
-  & div {
+  & span {
     position: absolute;
     transform: translate(-50%, -50%);
     animation: ${fadeInWithCentering} 1s ease-in-out;

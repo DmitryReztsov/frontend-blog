@@ -48,7 +48,7 @@ export const GlobalStyle =  createGlobalStyle`
     font-size: 1rem;
     line-height: 1.5;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, Montserrat, Roboto, Helvetica Neue, Arial;
     color: ${props => props.theme.text.primary};
     background: ${props => props.theme.background.primary};

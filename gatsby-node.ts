@@ -6,7 +6,7 @@ const path = require(`path`)
 
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-  const blogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
+  const blogPostTemplate = path.resolve(`src/templates/BlogPost/BlogPost.tsx`)
   const result = await graphql<loadAllBlogPostsQuery>(`
     query loadAllBlogPosts {
       allContentfulBlogPost {
@@ -22,9 +22,18 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
           }
           previewImg {
             id
+            contentful_id
+            gatsbyImageData
           }
           text {
             raw
+            references {
+              ... on ContentfulAsset {
+                contentful_id
+                __typename
+                gatsbyImageData(height: 300)
+              }
+            }
           }
         }
       }

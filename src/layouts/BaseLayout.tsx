@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useState } from 'react';
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { DarkTheme, LightTheme } from '@style/theme';
@@ -20,15 +20,28 @@ const Main = styled.main`
 `
 
 const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
-  const isLightTheme = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const cachedTheme = sessionStorage.getItem('theme') as ThemeMode;
+  const isSystemLightTheme = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-  const [theme, setTheme] = useState(isLightTheme ? LightTheme : DarkTheme);
+  const [theme, setTheme] = useState(cachedTheme === ThemeMode.light ? LightTheme: DarkTheme);
+
+  const handleSetTheme = () => {
+    const newTheme = theme.mode === ThemeMode.light ? DarkTheme : LightTheme;
+    setTheme(newTheme)
+    sessionStorage.setItem('theme', theme.mode === ThemeMode.light ?  ThemeMode.dark : ThemeMode.light)
+  }
+
+  useEffect(() => {
+    if (!cachedTheme) {
+      sessionStorage.setItem('theme', isSystemLightTheme ? ThemeMode.light : ThemeMode.dark)
+    }
+  }, []);
 
   return (
     <StyledLayout>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <PageHeader setTheme={() => setTheme(theme.mode === ThemeMode.light ? DarkTheme : LightTheme)} />
+        <PageHeader setTheme={handleSetTheme} />
           <Main>
             {children}
           </Main>

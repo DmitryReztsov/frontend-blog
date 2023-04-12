@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { Link as GatsbyLink } from "gatsby"
+import { GatsbyLinkProps, Link as GatsbyLink } from "gatsby"
 
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ const StyledLink = styled(props => <GatsbyLink {...props} />)`
   }
 `
 
-interface LinkProps {
+export interface LinkProps extends GatsbyLinkProps<any> {
   to: string,
 }
 

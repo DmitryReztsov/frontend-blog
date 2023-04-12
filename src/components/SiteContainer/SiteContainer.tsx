@@ -5,7 +5,7 @@ const StyledSiteContainer = styled.div`
   margin: 0 auto;
   max-width: 900px;
 
-  @media(max-width: 1024px) {
+  @media(${({ theme }) => theme.media.large}) {
     padding: 0 32px;
   }
 `

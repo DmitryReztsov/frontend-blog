@@ -5,6 +5,7 @@ export const PageHeader = styled.header`
   width: 100%;
   position: fixed;
   top: 0;
+  z-index: 3;
 `
 
 export const Container = styled.div`
