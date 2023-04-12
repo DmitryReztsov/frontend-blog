@@ -20,19 +20,24 @@ const Main = styled.main`
 `
 
 const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
-  const cachedTheme = sessionStorage.getItem('theme') as ThemeMode;
-  const isSystemLightTheme = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const cachedTheme: ThemeMode | null = typeof sessionStorage !== 'undefined'
+    ? sessionStorage.getItem('theme') as ThemeMode
+    : null;
+
+  const isSystemLightTheme = typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-color-scheme: light)').matches;
 
   const [theme, setTheme] = useState(cachedTheme === ThemeMode.light ? LightTheme: DarkTheme);
 
   const handleSetTheme = () => {
     const newTheme = theme.mode === ThemeMode.light ? DarkTheme : LightTheme;
     setTheme(newTheme)
+    typeof sessionStorage !== 'undefined' &&
     sessionStorage.setItem('theme', theme.mode === ThemeMode.light ?  ThemeMode.dark : ThemeMode.light)
   }
 
   useEffect(() => {
-    if (!cachedTheme) {
+    if (!cachedTheme && typeof sessionStorage !== 'undefined') {
       sessionStorage.setItem('theme', isSystemLightTheme ? ThemeMode.light : ThemeMode.dark)
     }
   }, []);

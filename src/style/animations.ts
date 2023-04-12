@@ -35,3 +35,12 @@ export const fadeInWithCentering = keyframes`
     transform: translate(-50%, -50%) scale(1);
   }
 `
+
+export const fill = keyframes`
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+`
