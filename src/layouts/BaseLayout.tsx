@@ -20,25 +20,28 @@ const Main = styled.main`
 `
 
 const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
-  const cachedTheme: ThemeMode | null = typeof sessionStorage !== 'undefined'
+  const cachedThemeMode: ThemeMode | null = typeof sessionStorage !== 'undefined'
     ? sessionStorage.getItem('theme') as ThemeMode
     : null;
 
-  const isSystemLightTheme = typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: light)').matches;
+  const systemThemeMode = typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-color-scheme: light)').matches ? ThemeMode.light : ThemeMode.dark;
 
-  const [theme, setTheme] = useState(cachedTheme === ThemeMode.light ? LightTheme: DarkTheme);
+  const [theme, setTheme] = useState((cachedThemeMode || systemThemeMode) === ThemeMode.light ? LightTheme: DarkTheme);
 
   const handleSetTheme = () => {
     const newTheme = theme.mode === ThemeMode.light ? DarkTheme : LightTheme;
     setTheme(newTheme)
-    typeof sessionStorage !== 'undefined' &&
-    sessionStorage.setItem('theme', theme.mode === ThemeMode.light ?  ThemeMode.dark : ThemeMode.light)
+    if (typeof sessionStorage !== 'undefined') {
+      sessionStorage.setItem('theme', theme.mode === ThemeMode.light ?  ThemeMode.dark : ThemeMode.light)
+    }
   }
 
   useEffect(() => {
-    if (!cachedTheme && typeof sessionStorage !== 'undefined') {
-      sessionStorage.setItem('theme', isSystemLightTheme ? ThemeMode.light : ThemeMode.dark)
+    if (!cachedThemeMode) {
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.setItem('theme', systemThemeMode ? ThemeMode.light : ThemeMode.dark)
+      }
     }
   }, []);
 
