@@ -1,5 +1,6 @@
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { motion } from "framer-motion"
 
 import { DarkTheme, LightTheme } from '@style/theme';
 import PageHeader from '@components/PageHeader/PageHeader';
@@ -15,7 +16,7 @@ const StyledLayout = styled.div`
   justify-content: space-between;
 `
 
-const Main = styled.main`
+const Main = styled(motion.main)`
   flex: 1 1 auto;
 `
 
@@ -50,7 +51,17 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <PageHeader setTheme={handleSetTheme} />
-          <Main>
+          <Main
+            initial={{ opacity: 0, x: -200 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 200 }}
+            transition={{
+              type: "spring",
+              mass: 0.35,
+              stiffness: 75,
+              duration: 0.3
+            }}
+          >
             {children}
           </Main>
         <PageFooter />

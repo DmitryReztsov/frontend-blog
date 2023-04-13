@@ -89,8 +89,6 @@ export const GlobalStyle =  createGlobalStyle`
   input, select, textarea, button {
     border: none;
     font-family: inherit;
-    color: ${props => props.theme.text.primary};
-    background: ${props => props.theme.background.primary};
 
     &:focus {
       outline: 0;
