@@ -20,12 +20,17 @@ const Main = styled(motion.main)`
   flex: 1 1 auto;
 `;
 
+const isBrowser = typeof window !== "undefined";
+
 const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
-  const isBrowser = typeof window !== "undefined"
-  const savedTheme = !isBrowser ? null : localStorage.getItem('theme') === ThemeMode.light ? LightTheme : DarkTheme;
+  const savedTheme = !isBrowser
+    ? null
+    : localStorage.getItem('theme') === ThemeMode.light
+      ? LightTheme
+      : DarkTheme;
 
   const [theme, setTheme] = useState(savedTheme ? savedTheme :
-  !isBrowser ? DarkTheme : window
+  !isBrowser ? LightTheme : window
     .matchMedia('(prefers-color-scheme: light)')
     .matches
       ? LightTheme
@@ -44,6 +49,8 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
       .addEventListener('change', ({ matches: isLight }) => {
         setTheme(isLight ? LightTheme: DarkTheme);
       });
+    console.log('init')
+
   }, []);
 
   useEffect(() => {
@@ -51,27 +58,29 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
     localStorage.setItem('theme', theme.mode)
   }, [theme]);
 
+  console.log(theme)
+
   return (
-    <StyledLayout>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle theme={theme} />
-        <PageHeader setTheme={handleSetTheme} />
-          <Main
-            initial={{ opacity: 0, x: -200 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 200 }}
-            transition={{
-              type: 'spring',
-              mass: 0.35,
-              stiffness: 75,
-              duration: 0.3
-            }}
-          >
-            {children}
-          </Main>
-        <PageFooter />
-      </ThemeProvider>
-    </StyledLayout>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <StyledLayout>
+          <PageHeader setTheme={handleSetTheme} />
+            <Main
+              initial={{ opacity: 0, x: -200 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 200 }}
+              transition={{
+                type: 'spring',
+                mass: 0.35,
+                stiffness: 75,
+                duration: 0.3
+              }}
+            >
+              {children}
+            </Main>
+          <PageFooter />
+      </StyledLayout>
+    </ThemeProvider>
   );
 };
 
