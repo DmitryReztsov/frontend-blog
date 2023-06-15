@@ -54,7 +54,7 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <StyledLayout>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
+        <GlobalStyle theme={theme} />
         <PageHeader setTheme={handleSetTheme} />
           <Main
             initial={{ opacity: 0, x: -200 }}
