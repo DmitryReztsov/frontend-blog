@@ -21,9 +21,14 @@ const Main = styled(motion.main)`
 `;
 
 const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
-  const [theme, setTheme] = useState(window.matchMedia('(prefers-color-scheme: light)').matches
-    ? LightTheme
-    : DarkTheme);
+  const savedTheme = !localStorage ? null : localStorage.getItem('theme') === ThemeMode.light ? LightTheme : DarkTheme;
+
+  const [theme, setTheme] = useState(savedTheme ? savedTheme :
+  !window ? DarkTheme : window
+    .matchMedia('(prefers-color-scheme: light)')
+    .matches
+      ? LightTheme
+      : DarkTheme);
 
   const handleSetTheme = () => {
     const newTheme = theme.mode === ThemeMode.light ? DarkTheme : LightTheme;
@@ -31,12 +36,19 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
   };
 
   useEffect(() => {
+    if (savedTheme) return;
+    if (!window) return;
     window
       .matchMedia('(prefers-color-scheme: light)')
       .addEventListener('change', ({ matches: isLight }) => {
-        setTheme(isLight ? LightTheme: DarkTheme)
-      })
+        setTheme(isLight ? LightTheme: DarkTheme);
+      });
   }, []);
+
+  useEffect(() => {
+    if (!localStorage) return;
+    localStorage.setItem('theme', theme.mode)
+  }, [theme]);
 
   return (
     <StyledLayout>
