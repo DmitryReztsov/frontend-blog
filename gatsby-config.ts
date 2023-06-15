@@ -11,6 +11,9 @@ const config: GatsbyConfig = {
     siteUrl: 'https://www.dmitryreztsovblog.gatsbyjs.io',
     description: "This is Frontzilla, Dmitry Reztsov's personal website"
   },
+  flags: {
+    DEV_SSR: true
+  },
   graphqlTypegen: true,
   plugins: [
     {

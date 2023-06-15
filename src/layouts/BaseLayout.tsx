@@ -21,10 +21,11 @@ const Main = styled(motion.main)`
 `;
 
 const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
-  const savedTheme = !localStorage ? null : localStorage.getItem('theme') === ThemeMode.light ? LightTheme : DarkTheme;
+  const isBrowser = typeof window !== "undefined"
+  const savedTheme = !isBrowser ? null : localStorage.getItem('theme') === ThemeMode.light ? LightTheme : DarkTheme;
 
   const [theme, setTheme] = useState(savedTheme ? savedTheme :
-  !window ? DarkTheme : window
+  !isBrowser ? DarkTheme : window
     .matchMedia('(prefers-color-scheme: light)')
     .matches
       ? LightTheme
@@ -37,7 +38,7 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (savedTheme) return;
-    if (!window) return;
+    if (!isBrowser) return;
     window
       .matchMedia('(prefers-color-scheme: light)')
       .addEventListener('change', ({ matches: isLight }) => {
@@ -46,7 +47,7 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (!localStorage) return;
+    if (!isBrowser) return;
     localStorage.setItem('theme', theme.mode)
   }, [theme]);
 
