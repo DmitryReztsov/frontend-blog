@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-export const Intro = styled.div`
-`
 
 export const TextContainer = styled.div`
   margin-top: 2rem;

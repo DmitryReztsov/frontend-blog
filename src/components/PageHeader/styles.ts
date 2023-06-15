@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import Link from '@uikit/Link/Link';
 
 export const PageHeader = styled.header`
@@ -6,6 +7,7 @@ export const PageHeader = styled.header`
   position: fixed;
   top: 0;
   z-index: 3;
+  backdrop-filter: blur(10px);
 `
 
 export const Container = styled.div`
@@ -19,7 +21,7 @@ export const Logo = styled(Link)`
   font-size: 1.5rem;
   font-weight: 700;
   flex: 0 0 20%;
-  font-family: Orbitron;
+  font-family: Orbitron, sans-serif;
 `
 
 export const Menu = styled.ul`

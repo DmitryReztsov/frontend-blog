@@ -49,9 +49,10 @@ export const GlobalStyle =  createGlobalStyle`
     line-height: 1.5;
     width: 100%;
     height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, Montserrat, Roboto, Helvetica Neue, Arial;
+    font-family: -apple-system, BlinkMacSystemFont, Montserrat, Roboto, Helvetica Neue, Arial, sans-serif;
     color: ${props => props.theme.text.primary};
     background: ${props => props.theme.background.primary};
+    scroll-behavior: smooth;
   }
 
   #___gatsby {

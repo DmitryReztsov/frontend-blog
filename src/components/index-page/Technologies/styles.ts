@@ -2,9 +2,6 @@ import styled from "styled-components";
 
 import { fadeInWithCentering, spinWithCentering } from "@style/animations";
 
-export const Technologies = styled.div`
-`
-
 export const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;

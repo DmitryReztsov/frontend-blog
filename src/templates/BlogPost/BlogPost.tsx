@@ -12,6 +12,8 @@ import BaseLayout from '@layouts/BaseLayout';
 import SiteContainer from '@components/SiteContainer/SiteContainer';
 import Code from '@uikit/Code/Code';
 import GoBackButton from '@components/utils/GoBackButton/GoBackButton';
+import Divider from '@uikit/Divider/Divider';
+import Chip from '@uikit/Chip/Chip';
 
 const options: Options = {
   renderMark: {
@@ -44,7 +46,6 @@ const options: Options = {
 const BlogPost = ({ pageContext }: PageProps<any, Queries.ContentfulBlogPost>) => {
   const { title, author, createdAt, previewImg, text, tags, intro } = pageContext;
   const image = getImage(previewImg!.gatsbyImageData)
-
   return (
     <BaseLayout>
       <SiteContainer>
@@ -64,6 +65,14 @@ const BlogPost = ({ pageContext }: PageProps<any, Queries.ContentfulBlogPost>) =
             {intro?.intro}
           </S.CommonText>
           {text && renderRichText(text, options)}
+          <S.DividerContainer>
+            <Divider />
+          </S.DividerContainer>
+          {!!tags?.length && (
+            <S.TagsContainer>
+              {tags.map((tag) => <Chip key={tag}>{tag}</Chip>)}
+            </S.TagsContainer>)
+          }
         </S.Content>
       </SiteContainer>
     </BaseLayout>

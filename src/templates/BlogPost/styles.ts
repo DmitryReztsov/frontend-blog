@@ -59,3 +59,14 @@ export const Code = styled.code`
 export const Link = styled(UiLink)`
   color: ${({ theme }) => theme.palette.primary};
 `
+
+export const DividerContainer = styled.div`
+  margin-top: 2rem;
+`
+
+export const TagsContainer = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`

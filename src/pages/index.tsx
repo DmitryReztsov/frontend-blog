@@ -8,6 +8,7 @@ import Technologies from "@components/index-page/Technologies/Technologies";
 import Trending from '@components/index-page/Trending/Trending';
 
 const IndexPage: React.FC<PageProps> = () => {
+
   return (
     <BaseLayout>
       <Intro />

@@ -6,7 +6,7 @@ const StyledChip = styled.span`
   gap: 0.5rem;
   border: ${({theme}) => theme.border.medium};
   border-radius: ${({theme}) => theme.borderRadius.medium};
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.75rem;
 `
 
 interface ChipProps {

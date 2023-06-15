@@ -25,6 +25,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
             contentful_id
             gatsbyImageData
           }
+          tags
           text {
             raw
             references {

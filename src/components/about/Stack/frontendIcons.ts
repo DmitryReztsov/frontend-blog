@@ -2,8 +2,8 @@ import Icons from '@assets/icons';
 import React from 'react';
 
 export interface ListItem {
-  logo: React.ReactNode,
-  darkThemeLogo?: React.ReactNode,
+  logo: React.ElementType,
+  darkThemeLogo?: React.ElementType,
   alt: string,
 }
 
